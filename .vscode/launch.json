@@ -1,0 +1,51 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "development",
+      "type": "cppdbg",
+      "request": "launch",
+      "program": "echo ${fileBasenameNoExtension}",
+      "stopAtEntry": false,
+      "cwd": "${workspaceFolder}",
+      "environment": [],
+      "args": [],
+      "setupCommands": [
+        {
+          "description": "Enable pretty-printing for gdb",
+          "text": "-enable-pretty-printing",
+          "ignoreFailures": true
+        }
+      ],
+      "preLaunchTask": "development build",
+      "windows": {
+        "name": "development",
+        "type": "cppdbg",
+        "request": "launch",
+        "program": "${workspaceFolder}\\build\\main.exe",
+        "MIMode": "gdb",
+        "miDebuggerPath": "gdb.exe",
+        "miDebuggerArgs": "--interpreter=mi2",
+        "externalConsole": false
+      },
+      "linux": {
+        "name": "development",
+        "type": "cppdbg",
+        "request": "launch",
+        "program": "${workspaceFolder}/build/main",
+        "MIMode": "gdb",
+        "miDebuggerPath": "/usr/build/gdb",
+        "miDebuggerArgs": "--interpreter=mi2",
+        "externalConsole": false
+      },
+      "osx": {
+        "name": "development",
+        "type": "cppdbg",
+        "request": "launch",
+        "program": "${workspaceFolder}/build/main",
+        "MIMode": "lldb",
+        "externalConsole": false // set to "true" to open a terminal window and input from stdin
+      }
+    }
+  ]
+}

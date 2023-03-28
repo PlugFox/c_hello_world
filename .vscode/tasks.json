@@ -1,0 +1,139 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "create build directory",
+      "type": "shell",
+      "windows": {
+        "command": "New-Item -ItemType Directory -Path ${workspaceFolder}\\build, ${workspaceFolder}\\build -Force -ErrorAction SilentlyContinue -OutVariable output | Out-Null"
+      },
+      "linux": {
+        "command": "mkdir -p ${workspaceFolder}/build ${workspaceFolder}/build > /dev/null 2>&1"
+      },
+      "osx": {
+        "command": "mkdir -p ${workspaceFolder}/build ${workspaceFolder}/build > /dev/null 2>&1"
+      },
+      "options": {
+        "cwd": "${workspaceFolder}"
+      }
+    },
+    {
+      "type": "shell",
+      "label": "development build",
+      "windows": {
+        "command": "clang.exe",
+        "args": [
+          "-fcolor-diagnostics", // Enable colors in diagnostics
+          "-fansi-escape-codes", // Use ANSI escape codes for diagnostics
+          "-g", // Generate source-level debug information
+          "-std=C17", // Language standard to compile for
+          "main.c", // "${file}" - The source file to compile
+          "-o",
+          "${workspaceFolder}\\build\\main.exe" // "${workspaceFolder}\\build\\${fileBasenameNoExtension}.exe"
+        ]
+      },
+      "linux": {
+        "command": "clang",
+        "args": [
+          "-fcolor-diagnostics",
+          "-fansi-escape-codes",
+          "-g",
+          "-std=c17",
+          "main.c",
+          "-o",
+          "${workspaceFolder}/build/main"
+        ]
+      },
+      "osx": {
+        "command": "clang",
+        "args": [
+          "-fcolor-diagnostics",
+          "-fansi-escape-codes",
+          "-g",
+          "-std=c17",
+          "main.c",
+          "-o",
+          "${workspaceFolder}/build/main"
+        ]
+      },
+      "dependsOn": ["create build directory"],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "problemMatcher": ["$gcc"],
+      "runOptions": {
+        "runOn": "default"
+      },
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "detail": "compiler: clang"
+    },
+    {
+      "type": "shell",
+      "label": "production build",
+      "windows": {
+        "command": "clang.exe",
+        "args": [
+          "-fcolor-diagnostics",
+          "-fansi-escape-codes",
+          "-std=C17",
+          "-O3",
+          "-Wall",
+          "-Wextra",
+          "-pedantic",
+          "-Werror",
+          "main.c",
+          "-o",
+          "${workspaceFolder}\\build\\main.exe"
+        ]
+      },
+      "linux": {
+        "command": "clang",
+        "args": [
+          "-fcolor-diagnostics",
+          "-fansi-escape-codes",
+          "-std=c17",
+          "-O3",
+          "-Wall",
+          "-Wextra",
+          "-pedantic",
+          "-Werror",
+          "main.c",
+          "-o",
+          "${workspaceFolder}/build/main"
+        ]
+      },
+      "osx": {
+        "command": "clang",
+        "args": [
+          "-fcolor-diagnostics",
+          "-fansi-escape-codes",
+          "-std=c17",
+          "-O3",
+          "-Wall",
+          "-Wextra",
+          "-pedantic",
+          "-Werror",
+          "main.c",
+          "-o",
+          "${workspaceFolder}/build/main"
+        ]
+      },
+      "dependsOn": ["create build directory"],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "problemMatcher": ["$gcc"],
+      "runOptions": {
+        "runOn": "default"
+      },
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "detail": "compiler: clang"
+    }
+  ]
+}
